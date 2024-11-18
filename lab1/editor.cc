@@ -1,7 +1,7 @@
 #include "editor.h"
 
 #include <string>
-
+//commect check for make
 using std::string;
 
 using size_type = Editor::size_type;
