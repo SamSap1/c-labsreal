@@ -1,0 +1,1 @@
+decode.o: decode.cc
