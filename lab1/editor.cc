@@ -12,5 +12,16 @@ size_type Editor::get_size() const
 }
 
 size_type Editor::find_left_par(size_type pos) const {
+	if (pos >= text.size() || (text[pos] != ')' && text[pos] != ']' && text[pos] != '}')){
+	
     return string::npos;
+
+
+	}
+
+
+
+
+    return string::npos;
+
 }
