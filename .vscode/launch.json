@@ -1,16 +1,15 @@
 {
-	// Use IntelliSense to learn about possible attributes.
-	// Hover to view descriptions of existing attributes.
-	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-	"version": "0.2.0",
-	"configurations": [
-		{
-			"type": "lldb",
-			"request": "launch",
-			"name": "Debug",
-			"program": "${workspaceFolder}/<executable file>",
-			"args": [],
-			"cwd": "${workspaceFolder}"
-		}
-	]
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug (LLDB)",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceFolder}/lab1/buggy_programs/bounds",  // Ensure this is the correct path to your executable
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "preLaunchTask": "build",  // Optional, only if you have a build task
+            
+        }
+    ]
 }
