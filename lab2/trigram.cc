@@ -4,42 +4,61 @@
 #include <algorithm>
 #include <string>
 
+std::vector<std::string> trigramFind(const std::string& word) {
+    std::vector<std::string> results;
 
-std::vector<std::string> trigramFind (const std::string& word){
-std::vector<std::string> results;
+    if (word.size() < 3) {
+        return results;  
+    }
 
-if (word.size() < 3){
-return results;
+  
+    std::string alphOnly;
+    for (char c : word) {
+        if (std::isalpha(c)) {
+            alphOnly.push_back(tolower(c));  
+        }
+    }
 
-}
+   
+    for (size_t i = 0; i <= alphOnly.size(); ++i) {  
 
-for (size_t i = 0; i <= word.size() -3; ++i){
-	std::string trigram = word.substr(i,3);
-	if(std::find(results.begin(), results.end(), trigram) == results.end()){
-		results.push_back(trigram);
+		if (i+2 < alphOnly.size()){
+        std::string trigram = alphOnly.substr(i, 3);
+        if (std::find(results.begin(), results.end(), trigram) == results.end()) {
+            results.push_back(trigram);
+        }
+		}
 	}
+    
 
+  
+    std::sort(results.begin(), results.end());
 
+    return results;
 }
 
-std::sort(results.begin(), results.end());
+void readDict() {
+    std::ifstream inFile("dict.txt");
+    std::ofstream outFile("words.txt");
 
-return results;
-}
+    std::string word;
+    while (std::getline(inFile, word)) {
+        if (word.empty()) {
+            continue;
+        }
 
-void readDict (){
+        std::vector<std::string> trigramList = trigramFind(word);
 
-std::ifstream inFile("dict.txt");
-std::ofstream outFile ("words.txt");
+        outFile << word << " " << trigramList.size() << " ";
 
-std::string word;
-while(std::getline(inFile, word)){
-if (word.empty()){
-	continue;
-}
+        for (const auto& trigram : trigramList) {
+            outFile << " " << trigram;
+        }
 
+			outFile << '\n'; 
 
-std::vector<std::string> trigramList = trigramFind(word);
+    }
 
-
+    inFile.close();
+    outFile.close();
 }
