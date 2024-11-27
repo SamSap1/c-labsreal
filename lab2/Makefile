@@ -21,7 +21,7 @@ LDFLAGS =   -g
 #LDFLAGS +=  -stdlib=libc++
 
 # Targets
-PROGS = trigram
+PROGS = trigram spell test_edit_distance
 
 
 all: $(PROGS)
@@ -38,8 +38,28 @@ trigram.o: trigram.cc trigram.h
 mainTrigram.o: mainTrigram.cc trigram.h
 	g++ -c mainTrigram.cc -o mainTrigram.o
 
+spell: spell.o dictionary.o word.o edit_distance.o
+	g++ -o spell spell.o dictionary.o word.o edit_distance.o
 
-	
+spell.o: spell.cc dictionary.h word.h
+	g++ -c spell.cc -o spell.o
+
+dictionary.o: dictionary.cc dictionary.h
+	g++ -c dictionary.cc -o dictionary.o
+
+word.o: word.cc word.h
+	g++ -c word.cc -o word.o
+
+test_edit_distance: test_edit_distance.o edit_distance.o
+	g++ -o test_edit_distance test_edit_distance.o edit_distance.o
+
+test_edit_distance.o: test_edit_distance.cc edit_distance.h
+	g++ -c test_edit_distance.cc -o test_edit_distance.o
+
+edit_distance.o: edit_distance.cc edit_distance.h
+	g++ -c edit_distance.cc -o edit_distance.o
+
+
 # Phony targets
 .PHONY: all test clean distclean
 
